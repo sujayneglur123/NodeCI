@@ -21,7 +21,10 @@ test("Clicking login starts Oauth flow", async () => {
 });
 
 test("When signed in shows logout button", async () => {
+  const fs = require("fs");
+  fs.appendFileSync("sample.txt", "Logging in" + "\n");
   await page.login();
+  fs.appendFileSync("sample.txt", "Login completed");
   const text = await page.getContentsOf('a[href="/auth/logout"]');
   expect(text).toEqual("Logout");
 });

@@ -11,7 +11,9 @@ require("./services/passport");
 require("./services/cache");
 
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI, { useMongoClient: true });
+mongoose.connect(keys.mongoURI, { useMongoClient: true })
+  .then(() => console.log("Database connected"))
+  .catch(err => { throw err });
 
 const app = express();
 
@@ -29,6 +31,7 @@ require("./routes/authRoutes")(app);
 require("./routes/blogRoutes")(app);
 
 if (["production", "ci"].includes(process.env.NODE_ENV)) {
+  console.log("In CI mode");
   app.use(express.static("client/build"));
 
   const path = require("path");
