@@ -9,3 +9,4 @@ module.exports = {
   redisUrl: "redis://127.0.0.1:6379"
 };
 ```
+Run ``` npm run dev``` to run the project in dev mode
